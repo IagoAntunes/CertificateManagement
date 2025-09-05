@@ -11,10 +11,18 @@
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageReference Include="MongoDB.Driver" Version="3.4.3" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CertificateManagement.API\CertificateManagement.API.csproj" />
     <ProjectReference Include="..\CertificateManagement.Domain\CertificateManagement.Domain.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Assets\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>
