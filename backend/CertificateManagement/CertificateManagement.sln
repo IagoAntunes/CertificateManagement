@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateManagement.Appli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateManagement.Core", "CertificateManagement.Core\CertificateManagement.Core.csproj", "{49F8991B-6F66-42D4-BA8A-75A1757FCEA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificateGenerator.Worker", "CertificateGenerator.Worker\CertificateGenerator.Worker.csproj", "{9EC42992-DA78-4B03-AB32-0D59DAF0E749}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{49F8991B-6F66-42D4-BA8A-75A1757FCEA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49F8991B-6F66-42D4-BA8A-75A1757FCEA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49F8991B-6F66-42D4-BA8A-75A1757FCEA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC42992-DA78-4B03-AB32-0D59DAF0E749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC42992-DA78-4B03-AB32-0D59DAF0E749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC42992-DA78-4B03-AB32-0D59DAF0E749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC42992-DA78-4B03-AB32-0D59DAF0E749}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

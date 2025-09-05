@@ -7,7 +7,7 @@ namespace CertificateManagement.Application.Services.Interfaces
 {
     public interface ICertificateService
     {
-        public Task<ResultBase> Create(CreateCertificateRequest request);
+        public Task<ResultOfT<CertificateDto>> Create(CreateCertificateRequest request);
         public Task<ResultOfT<List<CertificateDto>>> GetAll();
     }
 }

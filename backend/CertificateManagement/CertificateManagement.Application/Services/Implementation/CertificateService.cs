@@ -13,18 +13,22 @@ namespace CertificateManagement.Application.Services.Implementation
         private readonly ICertificateRepository repository;
         private readonly IMapper mapper;
 
-        public CertificateService(ICertificateRepository repository,IMapper mapper)
+        public CertificateService(
+            ICertificateRepository repository,
+            IMapper mapper
+            )
         {
             this.repository = repository;
             this.mapper = mapper;
         }
 
-        public async Task<ResultBase> Create(CreateCertificateRequest request)
+        public async Task<ResultOfT<CertificateDto>> Create(CreateCertificateRequest request)
         {
             var certificateDto = mapper.Map<CertificateDto>(request);
             var certificateEntity = mapper.Map<CertificateEntity>(certificateDto);
-            await repository.Create(certificateEntity);
-            return ResultBase.Success();
+            var createdCertificateEntity = await repository.Create(certificateEntity);
+            var createdCertificateDto = mapper.Map<CertificateDto>(createdCertificateEntity);
+            return ResultOfT<CertificateDto>.Success(createdCertificateDto);
         }
 
         public async Task<ResultOfT<List<CertificateDto>>> GetAll()

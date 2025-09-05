@@ -13,9 +13,10 @@ namespace CertificateManagement.Infrastructure.Repository
             _certificatesCollection = mongoDatabase.GetCollection<CertificateEntity>("certificates");
         }
 
-        public async Task Create(CertificateEntity certificate)
+        public async Task<CertificateEntity> Create(CertificateEntity certificate)
         {
-           await _certificatesCollection.InsertOneAsync(certificate);
+            await _certificatesCollection.InsertOneAsync(certificate);
+            return certificate;
         }
 
         public async Task<List<CertificateEntity>> GetAll()

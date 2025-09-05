@@ -5,7 +5,7 @@ namespace CertificateManagement.Domain.Repository
 {
     public interface ICertificateRepository
     {
-        public Task Create(CertificateEntity certificate);
+        public Task<CertificateEntity> Create(CertificateEntity certificate);
         public Task<List<CertificateEntity>> GetAll();
     }
 }
