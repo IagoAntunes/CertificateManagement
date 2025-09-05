@@ -3,6 +3,8 @@ using CertificateManagement.Application.Requests;
 using CertificateManagement.Domain.Entities;
 using MassTransit;
 using MongoDB.Driver;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 namespace CertificateGenerator.Worker
 {
@@ -11,18 +13,24 @@ namespace CertificateGenerator.Worker
         private readonly IMongoCollection<CertificateEntity> _collection;
         private readonly ILogger<CertificateGenerationRequest> _logger;
         private readonly IHostEnvironment hostEnvironment;
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IConfiguration _configuration;
         private readonly CertificateImageGenerator _imageGenerator;
 
         public CertificateGenerationConsumer(
             IMongoDatabase database,
             ILogger<CertificateGenerationRequest> logger,
-            IHostEnvironment hostEnvironment
-            
+            IHostEnvironment hostEnvironment,
+            IHttpClientFactory httpClientFactory,
+            IConfiguration configuration
+
         )
         {
             _collection = database.GetCollection<CertificateEntity>("certificates");
             this._logger = logger;
             this.hostEnvironment = hostEnvironment;
+            this._httpClientFactory = httpClientFactory;
+            this._configuration = configuration;
             _imageGenerator = new CertificateImageGenerator();
         }
 
@@ -47,30 +55,36 @@ namespace CertificateGenerator.Worker
                 certificate.CreatedAt
             );
 
-            var imagesDirectory = Path.Combine(hostEnvironment.ContentRootPath, "Images");
+            _logger.LogInformation("Enviando imagem para a API...");
+            var client = _httpClientFactory.CreateClient();
 
-            Directory.CreateDirectory(imagesDirectory);
+            var apiKey = _configuration.GetValue<string>("ApiKey");
+            client.DefaultRequestHeaders.Add("X-Api-Key", apiKey);
+            imageStream.Position = 0;
 
-            var fileName = $"{Guid.NewGuid()}.png";
-            var filePath = Path.Combine(imagesDirectory, fileName);
+            using var content = new MultipartFormDataContent();
+            content.Add(new StreamContent(imageStream), "file", $"{Guid.NewGuid()}.png");
 
-            _logger.LogInformation("Salvando imagem em disco no caminho: {FilePath}", filePath);
+            var baseUrl = _configuration.GetValue<string>("ApiSettings:BaseUrl");
+            var apiUrl = $"{baseUrl}/api/image";
 
-           
-            await using (var fileStream = new FileStream(filePath, FileMode.Create))
+            var response = await client.PostAsync(apiUrl, content);
+
+            if (!response.IsSuccessStatusCode)
             {
-                imageStream.Position = 0; 
-                await imageStream.CopyToAsync(fileStream);
+                _logger.LogError("Falha ao fazer upload da imagem para a API. Status: {StatusCode}", response.StatusCode);
+                return;
             }
 
-            _logger.LogInformation("Imagem salva com sucesso.");
-
+            var uploadResult = await response.Content.ReadFromJsonAsync<ImageUploadResponse>();
+            var publicUrl = uploadResult.Url;
+            var fileName = uploadResult.FileName;
 
             // Atualiza o MONGODB com a imagem
             var filter = Builders<CertificateEntity>.Filter.Eq(c => c.Id, certificateId);
             var update = Builders<CertificateEntity>.Update.Set(c => c.Image, new CertificateImage
             {
-                Path = filePath, 
+                Path = publicUrl, 
                 FileName = fileName,
                 ContentType = "image/png"
             });
@@ -79,4 +93,10 @@ namespace CertificateGenerator.Worker
             _logger.LogInformation("--> Documento do certificado {CertificateId} atualizado com o caminho do arquivo local.", certificateId);
         }
     }
+    public class ImageUploadResponse
+    {
+        public string Url { get; set; }
+        public string FileName { get; set; }
+    }
+
 }

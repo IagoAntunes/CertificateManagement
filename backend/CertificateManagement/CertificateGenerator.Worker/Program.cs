@@ -4,6 +4,7 @@ using MongoDB.Driver;
 
 var builder = Host.CreateApplicationBuilder(args);
 
+builder.Services.AddHttpClient();
 
 builder.Services.AddSingleton<IMongoClient>(sp =>
 {

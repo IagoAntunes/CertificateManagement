@@ -9,6 +9,7 @@ namespace CertificateManagement.Application.Mapping
         public EntityToDtoMapper()
         {
             // CreateMap<SourceEntity, DestinationDto>();
+            CreateMap<CertificateImage, ImageDto>().ReverseMap();
             CreateMap<CertificateEntity, CertificateDto>().ReverseMap();
         }
     }

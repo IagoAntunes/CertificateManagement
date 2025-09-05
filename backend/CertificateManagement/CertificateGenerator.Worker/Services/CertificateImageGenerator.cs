@@ -43,7 +43,7 @@ namespace CertificateGenerator.Worker.Services
                 var dateOptions = new RichTextOptions(dateFont)
                 {
                     Origin = new PointF(centerX, 450), 
-                    HorizontalAlignment = HorizontalAlignment.Center
+                    HorizontalAlignment = HorizontalAlignment.Center,
                 };
                 var formattedDate = generationDate.ToString("dd 'de' MMMM 'de' yyyy");
 
