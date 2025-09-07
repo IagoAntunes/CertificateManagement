@@ -1,0 +1,41 @@
+<div class="page-container">
+    <h2>Certificados gerados</h2>
+    <span>Visualize todos os certificados gerados</span>
+
+    @if (certificates.length == 0) {
+        <div class="no-certificate-card">
+            <img src="ic_certificate.svg" alt="">
+            <h3>Nenhum certificado gerado</h3>
+            <span>Gere certificados para consultar o histórico</span>
+            <button type="button" pButton label="Gerar certificado" (click)="changeMenuToCreateCertificate()"></button>
+        </div>
+    }@else{
+        @if(!isMenuSeeImage){
+            <div class="list-certificates">
+                @for (item of certificates; track $index) {
+                    <div class="item-certificate">
+                        <div class="info-certificate">
+                            <span id="title">{{item.studentFullName}}</span>
+                            <span id="subtitle">Gerado em {{item.createdAt | date:'MM/dd/yyyy'}}</span>
+                        </div>
+                        <button type="button" pButton label="Ver" (click)="seeImage(item)" ></button>
+                    </div>
+                }
+            </div>
+        }@else {
+            <div class="see-image-card">
+                <div class="header-card">
+                    <span class="back-button" (click)="onBackSeeImage()">
+                        <i class="pi pi-arrow-left"></i> Voltar
+                    </span>
+                    <button type="button" pButton label="Download" icon="pi pi-download"></button>
+                </div>
+                <div class="image-container">
+                    <img [src]="selectedCertificate?.image?.path" alt="Certificado">
+                </div>
+            </div>
+        }
+
+    }
+
+</div>

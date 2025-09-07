@@ -1,0 +1,16 @@
+<header class="topbar-container">
+    <div class="topbar-left">
+        <img src="logo_certificate.svg" alt="Logo da Aplicação" class="logo">
+    </div>
+
+    <div class="topbar-right">
+        <div class="menu-item" [class.selected]="selectedMenu === HeaderMenuItem.listCertificates" (click)="changeMenu(HeaderMenuItem.listCertificates)">
+            <img src="ic_medal.svg" alt="">
+            <span>Lista de certificados</span>
+        </div>
+        <div class="menu-item" [class.selected]="selectedMenu === HeaderMenuItem.createCertificate" (click)="changeMenu(HeaderMenuItem.createCertificate)">
+            <img src="ic_generate.svg" alt="">
+            <span>Gerar certificado</span>
+        </div>
+    </div>
+</header>

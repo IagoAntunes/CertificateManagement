@@ -1,0 +1,55 @@
+.topbar-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;           
+    height: 60px;                   
+    padding: 21px 30px;                
+
+    background-color: var(--surface-0); 
+    border-bottom: 1px solid #E2E8F0;
+    color: var(--text-color); 
+}
+
+.topbar-left {
+    .logo {
+        height: 35px; 
+        display: block; 
+    }
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem; 
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    img{
+        width: 20px;
+        height: 20px;
+    }
+
+    span{
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &:hover {
+        color: var(--primary-color);
+    }
+}
+
+.menu-item.selected {
+    color: var(--primary-color);
+    font-weight: 700;
+
+    img {
+        filter: invert(39%) sepia(97%) saturate(1439%) hue-rotate(198deg) brightness(100%) contrast(101%);
+    }
+}

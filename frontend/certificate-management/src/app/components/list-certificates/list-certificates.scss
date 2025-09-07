@@ -1,0 +1,126 @@
+.page-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: var(--surface-ground);
+
+    h2 {
+        font-weight: bold;
+        color: var(--text-color);
+        margin-bottom: 0;
+    }
+
+    span {
+        color: var(--text-color-secondary);
+        font-size: 14px;
+        margin-top: 0.25rem;
+    }
+
+    .p-button-primary {
+        padding: 14px 0px;
+    }
+}
+
+.no-certificate-card{
+    background: var(--surface-card);
+    margin-top: 32px;
+    padding: 32px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0rem;
+    border: 1px solid #E2E8F0;
+
+    img{
+        height: 48px;
+        width: 48px;
+    }
+
+    h3 {
+        margin-top: 20px;
+        margin-bottom: 0rem;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    span {
+        color: var(--text-color-secondary);
+        font-size: 12px;
+    }
+
+    button{
+        margin-top: 20px;
+    }
+}
+
+.list-certificates{
+    margin-top: 32px;
+    width: 100%;
+    max-width: 650px;
+    
+    .item-certificate{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        border: 1px solid #E2E8F0;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    #title{
+        font-weight: bold;
+        font-size: 14px;
+        color: var(--text-color);
+    }
+    #subtitle{
+        font-size: 12px;
+        color: var(--text-color-secondary);
+    }
+
+    .info-certificate{
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+// ... código existente ...
+.see-image-card{
+    margin-top: 32px;
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .header-card{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .back-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text-color);
+        
+        &:hover {
+            color: var(--primary-color);
+        }
+    }
+
+    .image-container img {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #E2E8F0;
+    }
+}

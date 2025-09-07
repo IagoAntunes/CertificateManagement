@@ -19,5 +19,10 @@ namespace CertificateManagement.Domain.Entities
         [BsonElement("createdAt")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)] 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public CertificateEntity()
+        {
+            CreatedAt = DateTime.UtcNow;
+        }
     }
 }
