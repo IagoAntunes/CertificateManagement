@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="page-container">
     <h2>Certificados gerados</h2>
     <span>Visualize todos os certificados gerados</span>
@@ -28,7 +29,7 @@
                     <span class="back-button" (click)="onBackSeeImage()">
                         <i class="pi pi-arrow-left"></i> Voltar
                     </span>
-                    <button type="button" pButton label="Download" icon="pi pi-download"></button>
+                    <button type="button" pButton label="Download" icon="pi pi-download" (click)="downloadImage()"></button>
                 </div>
                 <div class="image-container">
                     <img [src]="selectedCertificate?.image?.path" alt="Certificado">

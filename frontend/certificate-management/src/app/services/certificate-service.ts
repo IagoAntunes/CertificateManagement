@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SessionService } from './session-service';
 
 export interface CreateCertificateRequest{
   StudentFullName: string;
   Activities: string[];
+  sessionId: string;
 }
 
 export interface CertificateModel{
@@ -28,13 +30,15 @@ export interface ImageModel{
 export class CertificateService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = 'https://localhost:7015/api'; 
+  private readonly _sessionService = inject(SessionService);
 
   createCertificate(request: CreateCertificateRequest) : Observable<any>{
     return this.http.post(`${this.apiUrl}/Certificate`, request);
   }
 
   getAllCertificates(): Observable<any>{
-    return this.http.get(`${this.apiUrl}/Certificate`);
+    var sessionId = this._sessionService.getSessionId();
+    return this.http.get(`${this.apiUrl}/Certificate/${sessionId}`);
   }
 
 }

@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="page-container">
     <h2>Geração de certificado</h2>
     <span>Preencha os dados para gerar um novo certificado</span>
@@ -31,6 +32,6 @@
             </div>
         }
 
-        <button pButton type="button" label="Gerar Certificado" class="p-button-primary" [disabled]="!studentNameComplete" (click)="generateCertificate()"></button>
+        <button pButton type="button" label="Gerar Certificado" class="p-button-primary" [disabled]="!studentNameComplete || activities.length === 0" (click)="generateCertificate()"></button>
     </div>
 </div>
