@@ -8,6 +8,6 @@ namespace CertificateManagement.Application.Services.Interfaces
     public interface ICertificateService
     {
         public Task<ResultOfT<CertificateDto>> Create(CreateCertificateRequest request);
-        public Task<ResultOfT<List<CertificateDto>>> GetAll();
+        public Task<ResultOfT<List<CertificateDto>>> GetBySession(string sessionId);
     }
 }

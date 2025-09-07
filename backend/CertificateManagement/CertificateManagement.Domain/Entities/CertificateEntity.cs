@@ -16,9 +16,12 @@ namespace CertificateManagement.Domain.Entities
         [BsonElement("image")]
         public CertificateImage? Image { get; set; }
 
+        [BsonElement("sessionId")]
+        public string SessionId { get; set; }
+
         [BsonElement("createdAt")]
-        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)] 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime CreatedAt { get; set; }
 
         public CertificateEntity()
         {

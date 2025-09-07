@@ -26,14 +26,16 @@ namespace CertificateManagement.Application.Services.Implementation
         {
             var certificateDto = mapper.Map<CertificateDto>(request);
             var certificateEntity = mapper.Map<CertificateEntity>(certificateDto);
+            certificateEntity.Id = null;
+            certificateEntity.CreatedAt = DateTime.Now;
             var createdCertificateEntity = await repository.Create(certificateEntity);
             var createdCertificateDto = mapper.Map<CertificateDto>(createdCertificateEntity);
             return ResultOfT<CertificateDto>.Success(createdCertificateDto);
         }
 
-        public async Task<ResultOfT<List<CertificateDto>>> GetAll()
+        public async Task<ResultOfT<List<CertificateDto>>> GetBySession(string sessionId)
         {
-            var certificatesEntity = await repository.GetAll();
+            var certificatesEntity = await repository.GetBySession(sessionId);
             var certificatesDto = mapper.Map<List<CertificateDto>>(certificatesEntity);
             return ResultOfT<List<CertificateDto>>.Success(certificatesDto);
         }

@@ -6,12 +6,13 @@ using MassTransit;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+var allowedOrigin = builder.Configuration.GetValue<string>("AllowedOrigin");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
         builder =>
         {
-            builder.WithOrigins("http://localhost:4200")
+            builder.WithOrigins(allowedOrigin)
                    .AllowAnyHeader()
                    .AllowAnyMethod();
         });
@@ -47,8 +48,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 app.UseCors("AllowSpecificOrigin");
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapControllers();

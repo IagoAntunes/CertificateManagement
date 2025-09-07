@@ -4,5 +4,6 @@
     {
         public string StudentFullName { get; set; }
         public string[] Activities { get; set; }
+        public string SessionId { get; set; }
     }
 }

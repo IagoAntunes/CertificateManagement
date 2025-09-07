@@ -19,9 +19,9 @@ namespace CertificateManagement.Infrastructure.Repository
             return certificate;
         }
 
-        public async Task<List<CertificateEntity>> GetAll()
+        public async Task<List<CertificateEntity>> GetBySession(string sessionId)
         {
-            var certificates = await _certificatesCollection.Find(_ => true).ToListAsync();
+            var certificates = await _certificatesCollection.Find(c => c.SessionId == sessionId).ToListAsync();
 
             return certificates;
         }

@@ -38,9 +38,10 @@ namespace CertificateManagement.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Route("{sessonId}")]
+        public async Task<IActionResult> GetBySession([FromRoute] string sessonId)
         {
-            var result = await service.GetAll();
+            var result = await service.GetBySession(sessonId);
 
             return result.ToActionResult();
 
